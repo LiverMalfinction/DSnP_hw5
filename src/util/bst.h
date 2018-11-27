@@ -257,7 +257,7 @@ class BSTree
      }
      return end();
    }
-   void clear(){ while(empty() == 0) pop_front(); }
+   void clear(){ if(empty() == 0) clearNodes(_head->_left); _head->_left = _head->_right = 0; }
 
    void sort(){}
    void print() const{
@@ -333,6 +333,11 @@ class BSTree
          printTree(_space + 2, _ptr->_right);
        }
      }
+   }
+   void clearNodes(BSTreeNode<T>* _ptr){
+     if(_ptr->_left != 0)  clearNodes(_ptr->_left);
+     if(_ptr->_right != 0) clearNodes(_ptr->_right);
+     delete _ptr;
    }
 };
 
